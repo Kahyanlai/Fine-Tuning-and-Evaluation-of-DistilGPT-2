@@ -18,13 +18,13 @@ Using only 5 short paragraphs as domain samples, the study evaluates trade-offs 
 
 ## 🧩 Methodology
 
-### 1️⃣ Baseline (P-level Task)
+### 1️⃣ Baseline 
 - Model: DistilGPT-2 pretrained checkpoint (`transformers` library).  
 - Prompt: “Continue the following passage in the same style…”  
 - Generated text shows fluent academic style but limited healthcare context.  
 - **Perplexity:** 35.29 on generated text; ~41 average on domain samples.
 
-### 2️⃣ Full Fine-Tuning (C-level Task)
+### 2️⃣ Full Fine-Tuning 
 - Fine-tuned DistilGPT-2 on 5 healthcare abstracts.  
 - Settings:  
   - Epochs = 3, batch size = 2, LR = 5e-5 → then modified to 1e-4.  
@@ -34,7 +34,7 @@ Using only 5 short paragraphs as domain samples, the study evaluates trade-offs 
   - LR=1e-4: Better coherence and healthcare alignment but overfit behaviour.  
 - **Domain perplexity:** Improved from 26.2 → 18.1, but **generated perplexity worsened** (>110).  
 
-### 3️⃣ Parameter-Efficient Fine-Tuning (D-level Task)
+### 3️⃣ Parameter-Efficient Fine-Tuning
 - Method: **LoRA (Low-Rank Adaptation)** — adds trainable rank-8 adapter matrices in attention layers while freezing 99.8% of weights.  
 - Trainable parameters reduced from **82M → 0.16M (0.2%)**.  
 - Config: `r=8, α=32, bias="all", lr=5e-4`.  
